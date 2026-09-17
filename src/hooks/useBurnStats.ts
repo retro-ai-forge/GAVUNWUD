@@ -31,23 +31,14 @@ export function useBurnStats() {
     // the defaults rather than recomputing the burned total down to zero.
     if (!dexData || dexData.liquidityUsd <= 0) return
 
-    console.log('Dex Data in useBurnStats:', dexData)
-    
-    // Calculate values
     const totalLpShares = 1052 // Total LP shares
     const totalBurned = 219.3962 // Burned LP shares (hardcoded since leaderboard API is broken)
     const totalBurns = 156 // Number of burners (hardcoded since leaderboard API is broken)
-    
+
     const totalLiquidity = dexData.liquidityUsd // Total liquidity in USD (same as Tokenomics section)
     const lpShareValue = totalLiquidity / totalLpShares // Value per LP share
-    
-    console.log('Total Liquidity:', totalLiquidity)
-    console.log('LP Share Value:', lpShareValue)
-    
     const burnedUsdValue = totalBurned * lpShareValue // Calculate burned value based on shares
-    
-    console.log('Burned USD Value:', burnedUsdValue)
-    
+
     setData({
       lpSharesBurned: totalBurned,
       lpBurners: totalBurns,

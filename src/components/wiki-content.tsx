@@ -97,7 +97,7 @@ export function WikiContent() {
             { label: 'Token Symbol', value: '$WUD' },
             { label: 'Total Supply', value: '1 Trillion' },
             { label: 'Asset ID', value: '31337' },
-            { label: 'Website', value: 'gavunwud.xyz' }
+            { label: 'Website', value: 'GCP hosted' }
           ]
         }
       case 'history':
@@ -385,12 +385,8 @@ export function WikiContent() {
                         <div key={item.label} className={`flex flex-row justify-between py-2 px-2 rounded ${index % 2 === 1 ? 'bg-gray-800/50' : ''}`}>
                           <span className="font-semibold text-gray-300 flex-1">{item.label}</span>
                           <span className="text-white text-right w-1/2">
-                            {item.label === 'Website' || item.label === 'Symbol' ? (
-                              item.label === 'Website' ? (
-                                <a href={`https://${item.value}`} className="text-[#ff2e70] hover:underline break-all">{item.value}</a>
-                              ) : (
-                                <span className="text-[#ff2e70] font-bold">{item.value}</span>
-                              )
+                            {item.label === 'Symbol' ? (
+                              <span className="text-[#ff2e70] font-bold">{item.value}</span>
                             ) : (
                               item.value
                             )}

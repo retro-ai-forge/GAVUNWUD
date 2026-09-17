@@ -146,29 +146,6 @@ export default function NftSection() {
               <p className="text-gray-300 mb-6">
                 Burned LP tokens campaign was a success!
               </p>
-              <Link 
-                href="https://flappywud-backend-production.up.railway.app/burn-leaderboard" 
-                target="_blank" 
-                className="inline-flex items-center text-[#ff2e70] hover:text-[#ff2e70]/80 mb-6"
-              >
-                <span>View original leaderboard</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="ml-1"
-                >
-                  <path d="M7 7h10v10" />
-                  <path d="M7 17 17 7" />
-                </svg>
-              </Link>
-
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-300">Total LP Shares burned:</span>

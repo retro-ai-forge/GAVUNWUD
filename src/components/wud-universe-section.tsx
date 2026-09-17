@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState, useEffect } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { CheckIcon } from "@/components/ui/check-icon"
 import { motion, useInView } from "framer-motion"
@@ -10,40 +11,70 @@ import { useSound } from "@/components/sound-provider"
 // DOM. Withholding the autoplay permission stops it starting in the first place.
 const CABIN_PERMISSIONS = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 
+// A cross-origin frame reports nothing about its contents, so a load that never
+// completes is the only failure signal available: fall back to a still after this.
+const CABIN_LOAD_TIMEOUT_MS = 12000
+
 export default function WudUniverseSection() {
   const { muted } = useSound()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  // Separate, non-latching check: every rotation reloads the cross-origin cabin,
+  // so it only advances while the section is actually on screen.
+  const isOnScreen = useInView(ref, { amount: 0.2 })
   const [currentCabin, setCurrentCabin] = useState(1)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  // Bumped on manual navigation to restart the countdown.
+  const [rotationRestart, setRotationRestart] = useState(0)
 
   const goToPrevCabin = () => {
     setCurrentCabin(prev => prev <= 1 ? 50 : prev - 1)
-    resetAutoRotation()
+    setRotationRestart(n => n + 1)
   }
 
   const goToNextCabin = () => {
     setCurrentCabin(prev => prev >= 50 ? 1 : prev + 1)
-    resetAutoRotation()
+    setRotationRestart(n => n + 1)
   }
 
-  const resetAutoRotation = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-    }
-    intervalRef.current = setInterval(() => {
-      setCurrentCabin(prev => prev >= 50 ? 1 : prev + 1)
-    }, 15000)
-  }
+  const [cabinStatus, setCabinStatus] = useState<'loading' | 'ok' | 'failed'>('loading')
 
   useEffect(() => {
-    resetAutoRotation()
+    if (!isOnScreen) return
+
+    const interval = setInterval(() => {
+      setCurrentCabin(prev => prev >= 50 ? 1 : prev + 1)
+    }, 15000)
+
+    return () => clearInterval(interval)
+  }, [isOnScreen, rotationRestart])
+
+  // A cross-origin frame fires `load` even when it failed, so its own events say
+  // nothing useful. Probe the host directly instead: no-cors resolves whenever
+  // wuduniverse answers at all, and rejects when it is unreachable. Runs once,
+  // since the failure this guards against is the whole host being down.
+  useEffect(() => {
+    if (!isInView) return
+
+    let cancelled = false
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), CABIN_LOAD_TIMEOUT_MS)
+
+    fetch(`https://wuduniverse.xyz/cabin/${currentCabin}`, {
+      method: 'HEAD',
+      mode: 'no-cors',
+      signal: controller.signal,
+    })
+      .then(() => { if (!cancelled) setCabinStatus('ok') })
+      .catch(() => { if (!cancelled) setCabinStatus('failed') })
+      .finally(() => clearTimeout(timer))
+
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-      }
+      cancelled = true
+      clearTimeout(timer)
+      controller.abort()
     }
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isInView])
 
   return (
     <section ref={ref} className="py-20 px-4 md:px-6 bg-black/90 relative">
@@ -153,14 +184,31 @@ export default function WudUniverseSection() {
             className="order-2 md:order-2"
           >
             <div className="relative h-[500px] w-full rounded-xl overflow-hidden border-4 border-[#ff2e70] shadow-[0_0_30px_rgba(255,46,112,0.3)]">
-              <iframe
-                key={muted ? "muted" : "unmuted"}
-                src={`https://wuduniverse.xyz/cabin/${currentCabin}?hideUI=true&muted=true`}
-                className="w-full h-full"
-                title={`WUDuniverse Cabin ${currentCabin}`}
-                allow={muted ? CABIN_PERMISSIONS : `autoplay; ${CABIN_PERMISSIONS}`}
-                allowFullScreen
-              />
+              {/* Mounted only once the section is reached: the embed is heavy and
+                  loads nothing useful for visitors who never scroll this far. */}
+              {!isInView ? (
+                <div className="flex h-full w-full items-center justify-center bg-black/60 text-sm text-gray-500">
+                  Loading cabin…
+                </div>
+              ) : cabinStatus === 'failed' ? (
+                <Image
+                  src="/images/wuduniverse-cabin1.webp"
+                  alt="WUD Universe cabin"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              ) : (
+                <iframe
+                  key={muted ? "muted" : "unmuted"}
+                  src={`https://wuduniverse.xyz/cabin/${currentCabin}?hideUI=true&muted=true`}
+                  className="w-full h-full"
+                  title={`WUDuniverse Cabin ${currentCabin}`}
+                  allow={muted ? CABIN_PERMISSIONS : `autoplay; ${CABIN_PERMISSIONS}`}
+                  allowFullScreen
+                  loading="lazy"
+                />
+              )}
             </div>
 
             <div className="mt-8 flex justify-between items-center">

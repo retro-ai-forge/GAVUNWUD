@@ -5,9 +5,7 @@ import { motion, useInView } from "framer-motion"
 import { Doughnut } from "react-chartjs-2"
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from "chart.js"
 import { useDexScreenerPrice } from "@/hooks/useDexScreenerPrice"
-import { useHolderDistribution } from "@/hooks/useHolderDistribution"
 import { formatNumber, formatCurrency } from "@/lib/utils"
-import { HolderDistributionChart } from "@/components/holder-distribution-chart"
 // Register ChartJS components
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement)
 
@@ -300,17 +298,6 @@ export default function TokenomicsSection() {
             </div>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16"
-        >
-          <h3 className="text-2xl font-bold text-center text-[#ff2e70] mb-8">Holder Distribution</h3>
-          
-          <HolderDistributionChart />
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
