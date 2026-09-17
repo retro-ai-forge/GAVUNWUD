@@ -16,7 +16,7 @@ export default function NftSection() {
     {
       id: 1,
       name: "OG WUD BURN NFTs 🔥🔥🔥🔥",
-      image: "/images/OgBurnCollection.png",
+      image: "/images/OgBurnCollection.webp",
       rarity: "Epic",
       utility: "Multiple FlappyWUD Powerup Boosts",
       buttonText: "View Collection on Chaotic",
@@ -25,7 +25,7 @@ export default function NftSection() {
     { 
       id: 2, 
       name: "WUD Anniversary NFTs ⚡️⚡️⚡️⚡️", 
-      image: "/images/HappyBdayCollection.png", 
+      image: "/images/HappyBdayCollection.webp", 
       rarity: "Legendary", 
       utility: "Increased Drop Rate in Flappy WUD",
       buttonText: "View Collection on Chaotic",
@@ -34,7 +34,7 @@ export default function NftSection() {
     { 
       id: 3, 
       name: "WUD UNIVERSE PLATFORM", 
-      image: "/images/wudUniverseCollection.png", 
+      image: "/images/wudUniverseCollection.webp", 
       rarity: "Epic", 
       utility: "The ultimate dynamic NFT gaming platform powered by Polkadot and Unique Network.",
       buttonText: "Go to WUD Universe",
@@ -220,7 +220,7 @@ export default function NftSection() {
             <div className="relative h-full">
               <div className="absolute inset-0 rounded-lg flex items-center justify-center overflow-hidden">
                 <Image 
-                  src="/images/nfts1.png" 
+                  src="/images/nfts1.webp" 
                   alt="Burn Logo"
                   fill
                   className="object-contain opacity-70"

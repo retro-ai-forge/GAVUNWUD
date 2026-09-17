@@ -27,9 +27,9 @@ export function useBurnStats() {
   }, [])
 
   useEffect(() => {
-    // liquidityUsd is only meaningful when sourced from Dexscreener directly;
-    // fallback sources don't expose pool liquidity, so keep the defaults then.
-    if (!dexData || dexData.dataSource !== "dexscreener" || !dexData.liquidityUsd) return
+    // Without live pool liquidity the LP-share value can't be derived, so keep
+    // the defaults rather than recomputing the burned total down to zero.
+    if (!dexData || dexData.liquidityUsd <= 0) return
 
     console.log('Dex Data in useBurnStats:', dexData)
     

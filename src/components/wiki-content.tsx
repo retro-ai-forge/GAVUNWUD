@@ -138,7 +138,7 @@ export function WikiContent() {
             { label: 'Total Supply', value: '999.9B (~1T tokens)' },
             { label: 'Launch Date', value: 'April 22, 2024' },
             { label: 'Governance', value: 'Community-run since April 2024' },
-            { label: 'LP Burned', value: loading ? 'Loading...' : dexData?.dataSource === "dexscreener" ? `$${dexData.liquidityUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}+ (96.8%)` : '96.8%' },
+            { label: 'LP Burned', value: loading ? 'Loading...' : dexData && dexData.liquidityUsd > 0 ? `$${dexData.liquidityUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}+ (96.8%)` : '96.8%' },
             { label: 'Unique Addresses', value: '3,398' },
             { label: 'Sufficient Asset', value: 'Hydration Network' }
           ]
@@ -179,7 +179,7 @@ export function WikiContent() {
             { label: 'Gaming Utility', value: 'Flappy WUD rewards & boosts' },
             { label: 'NFT Integration', value: 'WUD Universe minting & trading' },
             { label: 'Reward Systems', value: 'Events, leaderboards, campaigns' },
-            { label: 'Burn Mechanisms', value: loading ? 'Loading...' : dexData?.dataSource === "dexscreener" ? `$${dexData.liquidityUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}+ LP burned` : '96.8% LP burned' },
+            { label: 'Burn Mechanisms', value: loading ? 'Loading...' : dexData && dexData.liquidityUsd > 0 ? `$${dexData.liquidityUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}+ LP burned` : '96.8% LP burned' },
             { label: 'Deflationary', value: 'NFT campaigns & special events' },
             { label: 'Future Expansion', value: 'Web3 games, staking, governance' },
             { label: 'Ecosystem Role', value: 'Polkadot Web3 gateway' },
@@ -316,7 +316,7 @@ export function WikiContent() {
               <Link href="/" className="flex-shrink-0 hover:opacity-80 transition-opacity">
                 <div className="relative h-12 w-12 sm:h-16 sm:w-16">
                   <Image
-                    src="/images/gavun-wud-black.png"
+                    src="/images/gavun-wud-black.webp"
                     alt="Gavun WUD Logo"
                     fill
                     className="object-contain"
@@ -960,7 +960,7 @@ function TokenInfoSection({ onNavigate, dexData, loading }: { onNavigate: (secti
           Added by a pure proxy which was subsequently killed.
         </p>
         <p className="text-gray-300 mb-4">
-          96.8% of LP burned{dexData?.dataSource === "dexscreener" && ` (${loading ? 'Loading...' : `~$${dexData.liquidityUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })} USD`} at current liquidity)`}, ensuring strong, locked-in liquidity.
+          96.8% of LP burned{dexData?.liquidityUsd > 0 && ` (${loading ? 'Loading...' : `~$${dexData.liquidityUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })} USD`} at current liquidity)`}, ensuring strong, locked-in liquidity.
         </p>
         <p className="text-gray-300 mb-4">
           <strong>References:</strong>
@@ -1040,7 +1040,7 @@ function TokenInfoSection({ onNavigate, dexData, loading }: { onNavigate: (secti
           Outperformed DOT and broader market trends in 2024–2025.
         </p>
         <p className="text-gray-300 mb-4">
-          Over 96.8% of LP{dexData?.dataSource === "dexscreener" && ` (${loading ? 'Loading...' : `$${(dexData.liquidityUsd * 0.968).toLocaleString(undefined, { maximumFractionDigits: 0 })}`})`} burned, demonstrating strong community commitment.
+          Over 96.8% of LP{dexData?.liquidityUsd > 0 && ` (${loading ? 'Loading...' : `$${(dexData.liquidityUsd * 0.968).toLocaleString(undefined, { maximumFractionDigits: 0 })}`})`} burned, demonstrating strong community commitment.
         </p>
         <p className="text-gray-300 mb-4">
           NFT campaigns burned 219 LP shares (~$30k USD).
@@ -1357,7 +1357,7 @@ function TokenUtilitySection({ onNavigate, dexData, loading }: { onNavigate: (se
         <ul className="space-y-2 text-gray-300 mb-4">
           <li className="flex items-start space-x-3">
             <CheckIcon className="text-[#ff2e70] mt-1 flex-shrink-0" />
-            <span>Over 96.8% of LP{dexData?.dataSource === "dexscreener" && ` (${loading ? 'Loading...' : `$${(dexData.liquidityUsd * 0.968).toLocaleString(undefined, { maximumFractionDigits: 0 })}`})`} burned</span>
+            <span>Over 96.8% of LP{dexData?.liquidityUsd > 0 && ` (${loading ? 'Loading...' : `$${(dexData.liquidityUsd * 0.968).toLocaleString(undefined, { maximumFractionDigits: 0 })}`})`} burned</span>
           </li>
           <li className="flex items-start space-x-3">
             <CheckIcon className="text-[#ff2e70] mt-1 flex-shrink-0" />
@@ -1818,7 +1818,7 @@ function FlappyWudSection({ onNavigate }: { onNavigate: (section: string) => voi
 
         <div className="bg-gray-900/50 p-4 rounded-lg mb-6">
           <img
-            src="/wiki/game_cover_2.0.png"
+            src="/wiki/game_cover_2.0.webp"
             alt="Flappy WUD Game Cover"
             className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
           />
@@ -2045,7 +2045,7 @@ function FlappyNftsSection({ onNavigate }: { onNavigate: (section: string) => vo
 
         <div className="bg-gray-900/50 p-4 rounded-lg mb-6">
           <img
-            src="/wiki/nfts1.png"
+            src="/wiki/nfts1.webp"
             alt="Flappy WUD NFT Collection"
             className="w-full max-w-2xl mx-auto rounded-lg shadow-lg"
           />
@@ -2371,7 +2371,7 @@ function WudUniverseSection({ onNavigate }: { onNavigate: (section: string) => v
 
         <div className="bg-gray-900/50 p-4 rounded-lg mb-6">
           <img
-            src="/wiki/wudUniverse.png"
+            src="/wiki/wudUniverse.webp"
             alt="WUD Universe Marketplace"
             className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
           />
@@ -2402,7 +2402,7 @@ function WudUniverseSection({ onNavigate }: { onNavigate: (section: string) => v
 
         <div className="bg-gray-900/50 p-4 rounded-lg mb-6">
           <img
-            src="/wiki/wudUniverseHeader.png"
+            src="/wiki/wudUniverseHeader.webp"
             alt="WUD Universe Header"
             className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
           />
@@ -2475,7 +2475,7 @@ function FlappeningSurgeSection({ onNavigate }: { onNavigate: (section: string) 
       <div className="prose prose-invert max-w-none">
         <div className="bg-gray-900/50 p-4 rounded-lg mb-6">
           <img
-            src="/wiki/game_cover_2.0.png"
+            src="/wiki/game_cover_2.0.webp"
             alt="Flappy WUD Game Cover"
             className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
           />
@@ -3065,7 +3065,7 @@ function N3MusTournamentsSection({ onNavigate }: { onNavigate: (section: string)
         </ul>
         <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-6">
           <Image
-            src="/wiki/Copy_adres.png"
+            src="/wiki/Copy_adres.webp"
             alt="How to copy your Substrate address from FlappyWUD"
             width={800}
             height={600}
@@ -3269,7 +3269,7 @@ function BifrostPartnershipSection({ onNavigate }: { onNavigate: (section: strin
 
         <div className="my-6">
           <img
-            src="/wiki/bifrost_BURN_BANNER.png"
+            src="/wiki/bifrost_BURN_BANNER.webp"
             alt="Bifrost Burn Banner"
             className="w-full rounded-lg"
           />
@@ -3293,7 +3293,7 @@ function WudflipSection({ onNavigate }: { onNavigate: (section: string) => void 
 
       <div className="bg-gray-900/50 p-4 rounded-lg mb-6">
         <img
-          src="/wiki/wudFlip.png"
+          src="/wiki/wudFlip.webp"
           alt="WUDFLIP - Gamified WUD Trading Experience"
           className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
         />
@@ -3391,7 +3391,7 @@ function AiAutomationSection({ onNavigate }: { onNavigate: (section: string) => 
 
       <div className="bg-gray-900/50 p-4 rounded-lg mb-6">
         <img
-          src="/wiki/agentWud.png"
+          src="/wiki/agentWud.webp"
           alt="Gavun Wud AI Agent"
           className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
         />
@@ -3472,7 +3472,7 @@ function CommunitySection({ onNavigate }: { onNavigate: (section: string) => voi
 
       <div className="bg-gray-900/50 p-4 rounded-lg mb-6">
         <img
-          src="/wiki/dex_screener1.png"
+          src="/wiki/dex_screener1.webp"
           alt="WUD Community Overview"
           className="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
         />
@@ -4168,7 +4168,7 @@ function FutureRoadmapSection({ onNavigate }: { onNavigate: (section: string) =>
 
         <div className="mb-6">
           <img
-            src="/wiki/second_age.png"
+            src="/wiki/second_age.webp"
             alt="Second Age Roadmap"
             className="w-full max-w-4xl mx-auto rounded-lg border border-gray-700"
           />

@@ -94,7 +94,7 @@ export default function CommunitySection() {
       id: 1,
       username: "CryptoMemer",
       handle: "@cryptomemer",
-      avatar: "/images/gavun-wud-black.png",
+      avatar: "/images/gavun-wud-black.webp",
       content: "Just aped into $WUD and I'm already up 69%! This is the memecoin Polkadot deserves! 🚀🚀🚀",
       likes: 420,
       retweets: 69,
@@ -107,7 +107,7 @@ export default function CommunitySection() {
       id: 2,
       username: "PolkadotMaxi",
       handle: "@dotmaxi",
-      avatar: "/images/gavun-wud-black.png",
+      avatar: "/images/gavun-wud-black.webp",
       content:
         "FlappyWUD is actually addictive. I've spent more time playing it than checking my portfolio today. Bullish on $WUD!",
       likes: 223,
@@ -121,7 +121,7 @@ export default function CommunitySection() {
       id: 3,
       username: "DeFiQueen",
       handle: "@defiqueen",
-      avatar: "/images/gavun-wud-black.png",
+      avatar: "/images/gavun-wud-black.webp",
       content:
         "The Gavun AI bot just roasted me for buying high and selling low. I've never been so entertained while losing money. $WUD is different.",
       likes: 512,
@@ -135,7 +135,7 @@ export default function CommunitySection() {
       id: 4,
       username: "AltcoinAnalyst",
       handle: "@altanalyst",
-      avatar: "/images/gavun-wud-black.png",
+      avatar: "/images/gavun-wud-black.webp",
       content: "My technical analysis shows $WUD forming a perfect meme pattern. Looking for a 10x from here within days.",
       likes: 387,
       retweets: 93,
@@ -148,7 +148,7 @@ export default function CommunitySection() {
       id: 5,
       username: "DotEcosystem",
       handle: "@doteco",
-      avatar: "/images/gavun-wud-black.png",
+      avatar: "/images/gavun-wud-black.webp",
       content: "Can't believe how strong the $WUD community is. Most active Telegram I've seen in months!",
       likes: 198,
       retweets: 31,
@@ -161,7 +161,7 @@ export default function CommunitySection() {
       id: 6,
       username: "MemeInvestor",
       handle: "@memeinvest",
-      avatar: "/images/gavun-wud-black.png",
+      avatar: "/images/gavun-wud-black.webp",
       content: "I've analyzed every Polkadot meme coin and $WUD has the best community, team transparency and dApp utility by far.",
       likes: 302,
       retweets: 57,
@@ -173,7 +173,7 @@ export default function CommunitySection() {
   ]
 
   const getRandomAvatar = () => {
-    return "/images/gavun-wud-black.png";
+    return "/images/gavun-wud-black.webp";
   }
 
   const formatTweetDate = (timeString: string) => {
@@ -345,7 +345,7 @@ export default function CommunitySection() {
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
                     <Image
-                      src={tweet.avatar || "/images/avatar-1.png"}
+                      src={tweet.avatar}
                       alt={tweet.username}
                       width={48}
                       height={48}
@@ -452,7 +452,7 @@ export default function CommunitySection() {
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
                     <Image
-                      src={tweet.avatar || "/images/avatar-1.png"}
+                      src={tweet.avatar}
                       alt={tweet.username}
                       width={48}
                       height={48}

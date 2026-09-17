@@ -42,7 +42,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <div className="relative h-12 w-12">
                 <Image 
-                  src="/images/gavun-wud-black.png" 
+                  src="/images/gavun-wud-black.webp" 
                   alt="Gavun WUD Logo" 
                   fill 
                   className="object-contain" 

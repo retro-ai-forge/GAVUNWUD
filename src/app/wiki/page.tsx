@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     siteName: 'WUD Memecoin',
     images: [
       {
-        url: 'https://gavunwud.xyz/wud_preview.png',
+        url: 'https://gavunwud.xyz/wud_preview.jpg',
         width: 1200,
         height: 630,
         alt: 'WUD Wiki',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Wiki | WUD Memecoin',
     description: 'Complete guide to the WUD ecosystem on Polkadot',
-    images: ['https://gavunwud.xyz/wud_preview.png'],
+    images: ['https://gavunwud.xyz/wud_preview.jpg'],
   },
 }
 

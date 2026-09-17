@@ -42,25 +42,44 @@ type PriceData = {
 
 const PAIR_ADDRESS = "0xb941ce809e9793289c9e9127102d447723cabdfb9d51d0893f2bdbf9958995ce"
 const WUD_ASSET_ID = 1000085
+const DOT_ASSET_ID = 5
 export const HYDRATION_PRICE_URL = "https://hydration-preis.neckwork.net/1000085-10/4h"
 
+// Pool reserves straight off Hydration RPC. Returns zeros rather than throwing:
+// a price without liquidity figures is still worth showing.
+async function fetchLpReserves(): Promise<{ wud: number; dot: number }> {
+  try {
+    const res = await fetch("/api/hydration/lp")
+    if (!res.ok) return { wud: 0, dot: 0 }
+    return await res.json()
+  } catch {
+    return { wud: 0, dot: 0 }
+  }
+}
+
 // Dexscreener has stopped indexing this pool. hydration-preis.neckwork.net
-// is a working public price feed for Hydration DEX assets used as a fallback;
-// it doesn't expose pool liquidity, FDV, or market cap, only price/change/volume.
+// is a working public price feed for Hydration DEX assets; it carries price,
+// change and volume, while liquidity comes from the chain itself.
 async function fetchFromPreis(): Promise<PriceData> {
-  const res = await fetch("https://hydration-preis.neckwork.net/api/market-stats")
+  const [res, reserves] = await Promise.all([
+    fetch("https://hydration-preis.neckwork.net/api/market-stats"),
+    fetchLpReserves(),
+  ])
   if (!res.ok) throw new Error(`Failed to fetch preis market stats: ${res.status}`)
   const assets: PreisAsset[] = await res.json()
   const asset = assets.find((a) => a.assetId === WUD_ASSET_ID)
   if (!asset) throw new Error("WUD not found in preis market stats")
 
+  const dotPrice = assets.find((a) => a.assetId === DOT_ASSET_ID)?.price ?? 0
+  const liquidityUsd = reserves.wud * asset.price + reserves.dot * dotPrice
+
   return {
     price: asset.price,
     change24h: (asset.change24h ?? 0) * 100,
     url: HYDRATION_PRICE_URL,
-    liquidityUsd: 0,
-    liquidityBase: 0,
-    liquidityQuote: 0,
+    liquidityUsd,
+    liquidityBase: reserves.wud,
+    liquidityQuote: reserves.dot,
     volume24h: asset.volumeUsd24h ?? 0,
     fdv: 0,
     marketCap: 0,

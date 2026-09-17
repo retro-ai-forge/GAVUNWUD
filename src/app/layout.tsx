@@ -22,7 +22,7 @@ export const metadata = {
     siteName: "WUD Memecoin",
     images: [
       {
-        url: "https://gavunwud.xyz/wud_preview.png",
+        url: "https://gavunwud.xyz/wud_preview.jpg",
         width: 1200,
         height: 630,
         alt: "WUD Memecoin",
@@ -35,7 +35,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "WUD Memecoin | No. 1 Memecoin on Polkadot",
     description: "$WUD is a chaotic mix of memes, utility, and community madness on Polkadot.",
-    images: ["https://gavunwud.xyz/wud_preview.png"],
+    images: ["https://gavunwud.xyz/wud_preview.jpg"],
     creator: "@GavunWud",
     site: "@GavunWud",
   },

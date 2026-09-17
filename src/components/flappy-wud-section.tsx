@@ -61,7 +61,7 @@ export default function FlappyWudSection() {
                   PLAY NOW
                 </Button>
               </div>
-              <div className="absolute inset-0 bg-[url('/images/flappy-wud-cover.png')] bg-cover bg-center"></div>
+              <div className="absolute inset-0 bg-[url('/images/flappy-wud-cover.webp')] bg-cover bg-center"></div>
             </div>
 
             <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">

@@ -96,7 +96,7 @@ export default function HeroSection() {
                 <div className="flex items-center gap-3">
                   <div className="relative h-10 w-10">
                     <Image
-                      src="/images/gavun-wud-black.png"
+                      src="/images/gavun-wud-black.webp"
                       alt="Gavun WUD Logo"
                       fill
                       className="object-contain"
@@ -150,7 +150,7 @@ export default function HeroSection() {
                 <div className="flex items-center gap-3">
                   <div className="relative h-12 w-12">
                     <Image
-                      src="/images/gavun-wud-black.png"
+                      src="/images/gavun-wud-black.webp"
                       alt="Gavun WUD Logo"
                       fill
                       className="object-contain"
@@ -323,7 +323,7 @@ export default function HeroSection() {
             >
               <div className="relative h-12 w-12 md:h-16 md:w-16">
                 <Image
-                  src="/images/gavun-wud-black.png"
+                  src="/images/gavun-wud-black.webp"
                   alt="Gavun WUD Logo"
                   fill
                   className="object-contain"
@@ -544,16 +544,16 @@ export default function HeroSection() {
                           </div>
                         )}
                       </div>
-                      {data.dataSource === "dexscreener" ? (
-                        <div>Liquidity: <span className="font-bold">${data.liquidityUsd.toLocaleString()}</span></div>
+                      {data.liquidityUsd > 0 ? (
+                        <div>Liquidity: <span className="font-bold">${Math.round(data.liquidityUsd).toLocaleString()}</span></div>
                       ) : (
                         <div>Liquidity: <span className="font-bold text-gray-400">Unavailable</span></div>
                       )}
                       {data.volume24h > 0 && (
-                        <div>24h Volume: <span className="font-bold">${data.volume24h.toLocaleString()}</span></div>
+                        <div>24h Volume: <span className="font-bold">${Math.round(data.volume24h).toLocaleString()}</span></div>
                       )}
                       {data.marketCap > 0 && (
-                        <div>Market Cap: <span className="font-bold">${data.marketCap.toLocaleString()}</span></div>
+                        <div>Market Cap: <span className="font-bold">${Math.round(data.marketCap).toLocaleString()}</span></div>
                       )}
                     </div>
                   )}

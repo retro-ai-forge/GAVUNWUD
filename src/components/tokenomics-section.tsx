@@ -172,26 +172,26 @@ export default function TokenomicsSection() {
                   </svg>
                   Liquidity
                   <span className="text-xs ml-2 text-gray-400">
-                    {loading ? '(loading...)' : dexData?.dataSource === "dexscreener" ? '(live data)' : '(unavailable)'}
+                    {loading ? '(loading...)' : dexData && dexData.liquidityUsd > 0 ? '(live data)' : '(unavailable)'}
                   </span>
                 </h3>
                 <ul className="space-y-2 text-gray-300">
                   <li className="flex justify-between">
                     <span>Total Liquidity:</span>
                     <span className="font-medium">
-                      {loading ? "Loading..." : dexData?.dataSource === "dexscreener" ? formatCurrency(dexData.liquidityUsd) : "n/a"}
+                      {loading ? "Loading..." : dexData && dexData.liquidityUsd > 0 ? formatCurrency(dexData.liquidityUsd) : "n/a"}
                     </span>
                   </li>
                   <li className="flex justify-between">
                     <span>WUD in LP:</span>
                     <span className="font-medium">
-                      {loading ? "Loading..." : dexData?.dataSource === "dexscreener" ? `${formatNumber(Math.round(dexData.liquidityBase))} WUD` : "n/a"}
+                      {loading ? "Loading..." : dexData && dexData.liquidityBase > 0 ? `${formatNumber(Math.round(dexData.liquidityBase))} WUD` : "n/a"}
                     </span>
                   </li>
                   <li className="flex justify-between">
                     <span>DOT in LP:</span>
                     <span className="font-medium">
-                      {loading ? "Loading..." : dexData?.dataSource === "dexscreener" ? `${dexData.liquidityQuote.toFixed(0)} DOT` : "n/a"}
+                      {loading ? "Loading..." : dexData && dexData.liquidityQuote > 0 ? `${dexData.liquidityQuote.toFixed(0)} DOT` : "n/a"}
                     </span>
                   </li>
                   <li className="flex justify-between">
