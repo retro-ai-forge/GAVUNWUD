@@ -1,0 +1,64 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "WUD Memecoin API",
+    "description": "API providing comprehensive data about the WUD memecoin ecosystem on Polkadot, including token info, games, NFTs, partnerships, and community resources.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "WUD Team",
+      "url": "https://gavunwud.xyz"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://gavunwud.xyz"
+    }
+  ],
+  "paths": {
+    "/api/wud-data": {
+      "get": {
+        "operationId": "getWudData",
+        "summary": "Get comprehensive WUD ecosystem data",
+        "description": "Returns complete information about WUD token, Flappy WUD game, WUD Universe, partnerships, community links, and getting started guides",
+        "responses": {
+          "200": {
+            "description": "Successful response with WUD ecosystem data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "project": {
+                      "type": "object",
+                      "description": "Basic project information"
+                    },
+                    "token": {
+                      "type": "object",
+                      "description": "WUD token details and utility"
+                    },
+                    "ecosystem": {
+                      "type": "object",
+                      "description": "All ecosystem components (Flappy WUD, WUD Universe, etc.)"
+                    },
+                    "partnerships": {
+                      "type": "object",
+                      "description": "Active partnerships (N3MUS, Bifrost)"
+                    },
+                    "community": {
+                      "type": "object",
+                      "description": "Community links and social channels"
+                    },
+                    "gettingStarted": {
+                      "type": "object",
+                      "description": "Step-by-step guides for new users"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
