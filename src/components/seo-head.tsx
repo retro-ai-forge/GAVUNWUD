@@ -12,7 +12,7 @@ const SeoHead = ({
   pageTitle,
   pageDescription,
   pagePath = "",
-  pageImage = "/gavun-wud-logo.webp",
+  pageImage = "/images/gavun-wud-logo.webp",
   pageKeywords = "",
 }: SeoHeadProps) => {
   // Default values

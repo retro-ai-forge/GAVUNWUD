@@ -73,7 +73,7 @@ export default function NftSection() {
             >
               <div className="relative h-64 w-full flex-shrink-0">
                 <Image
-                  src={nft.image || "/placeholder.svg"}
+                  src={nft.image}
                   alt={nft.name}
                   fill
                   className={`object-cover ${!nft.link ? 'grayscale' : 'transition-transform duration-500 group-hover:scale-110'}`}

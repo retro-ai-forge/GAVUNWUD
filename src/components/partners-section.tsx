@@ -64,7 +64,7 @@ export default function PartnersSection() {
             >
               <div className="h-16 mb-4 relative">
                 <Image
-                  src={partner.logo || "/placeholder.svg"}
+                  src={partner.logo}
                   alt={partner.name}
                   fill
                   className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"

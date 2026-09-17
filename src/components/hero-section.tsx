@@ -426,9 +426,20 @@ export default function HeroSection() {
                 <span className="text-[#ff2e70] font-bold">$WUD ON POLKADOT</span>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-bold font-['Karantina',sans-serif] leading-tight">
-                Me eenvunt JUM tuh mak Polkadut gud agan - Gavun Wud, Fownder of Polkadut 🍺
-              </h1>
+              <div>
+                <h1 className="text-4xl md:text-6xl font-bold font-['Karantina',sans-serif] leading-tight">
+                  JAM gud. Polkadut gud.
+                </h1>
+                <p className="mt-2 text-2xl md:text-3xl font-bold font-['Karantina',sans-serif] text-gray-200 leading-tight">
+                  Me eenvunt JUM tuh mak Polkadut gud agan
+                </p>
+                <p className="mt-2 text-lg md:text-xl font-['Karantina',sans-serif] text-[#ff2e70]">
+                  — Gavun Wud, Fownder of Polkadut 🍺
+                </p>
+                <p className="mt-3 text-sm text-gray-500 italic">
+                  JAM makes Polkadot good again
+                </p>
+              </div>
 
               <p className="text-xl text-gray-300">
                 Polkadot native memecoin making Polkadot good. Full degen. Full onchain. No VC. Only vibes.
