@@ -4,8 +4,14 @@ import { useRef, useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { CheckIcon } from "@/components/ui/check-icon"
 import { motion, useInView } from "framer-motion"
+import { useSound } from "@/components/sound-provider"
+
+// The cabin is cross-origin, so its background music can't be muted through the
+// DOM. Withholding the autoplay permission stops it starting in the first place.
+const CABIN_PERMISSIONS = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 
 export default function WudUniverseSection() {
+  const { muted } = useSound()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
   const [currentCabin, setCurrentCabin] = useState(1)
@@ -148,10 +154,11 @@ export default function WudUniverseSection() {
           >
             <div className="relative h-[500px] w-full rounded-xl overflow-hidden border-4 border-[#ff2e70] shadow-[0_0_30px_rgba(255,46,112,0.3)]">
               <iframe
+                key={muted ? "muted" : "unmuted"}
                 src={`https://wuduniverse.xyz/cabin/${currentCabin}?hideUI=true&muted=true`}
                 className="w-full h-full"
                 title={`WUDuniverse Cabin ${currentCabin}`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow={muted ? CABIN_PERMISSIONS : `autoplay; ${CABIN_PERMISSIONS}`}
                 allowFullScreen
               />
             </div>

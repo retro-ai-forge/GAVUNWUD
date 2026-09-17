@@ -6,7 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useDexScreenerPrice } from "@/hooks/useDexScreenerPrice"
+import { useDexScreenerPrice, HYDRATION_PRICE_URL } from "@/hooks/useDexScreenerPrice"
 import { useFlappeningStatus } from "@/hooks/useFlappeningStatus"
 import { SoundToggle } from "@/components/sound-toggle"
 
@@ -106,6 +106,7 @@ export default function HeroSection() {
                     <span className="text-white">gavunwud</span>
                     <span className="text-[#ff2e70]">.xyz</span>
                   </div>
+                  <SoundToggle />
                 </div>
               </div>
 
@@ -129,7 +130,6 @@ export default function HeroSection() {
                     </button>
                   )
                 ))}
-                <SoundToggle />
               </nav>
             </div>
           </motion.div>
@@ -334,6 +334,7 @@ export default function HeroSection() {
                 <span className="text-white">gavunwud</span>
                 <span className="text-[#ff2e70]">.xyz</span>
               </div>
+              <SoundToggle className="hidden md:flex" />
             </motion.div>
 
             <motion.nav
@@ -361,7 +362,6 @@ export default function HeroSection() {
                   </button>
                 )
               ))}
-              <SoundToggle />
             </motion.nav>
 
             <motion.div
@@ -443,10 +443,10 @@ export default function HeroSection() {
                   BUY $WUD ON HYDRATION DEX
                 </Button>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3 gap-3 w-full">
                   <Button
                     variant="outline"
-                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full"
+                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full h-auto whitespace-normal leading-tight"
                     onClick={() => window.open('https://www.coingecko.com/en/coins/gavun-wud', '_blank')}
                   >
                     TRACK ON COINGECKO
@@ -454,18 +454,18 @@ export default function HeroSection() {
 
                   <Button
                     variant="outline"
-                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full"
-                    onClick={() => window.open('https://dexscreener.com/polkadot/0xb941ce809e9793289c9e9127102d447723cabdfb9d51d0893f2bdbf9958995ce', '_blank')}
+                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full h-auto whitespace-normal leading-tight"
+                    onClick={() => window.open(HYDRATION_PRICE_URL, '_blank')}
                   >
-                    VIEW ON DEXSCREENER
+                    HYDRATION PRICE
                   </Button>
 
                   <Button
                     variant="outline"
-                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full"
+                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full h-auto whitespace-normal leading-tight"
                     onClick={() => window.open('https://www.geckoterminal.com/hydration/pools/0xb941ce809e9793289c9e9127102d447723cabdfb9d51d0893f2bdbf9958995ce', '_blank')}
                   >
-                    VIEW ON GECKOTERMINAL
+                    VIEW GECKOTERMINAL
                   </Button>
 
                 </div>
@@ -473,7 +473,7 @@ export default function HeroSection() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
                   <Button
                     variant="outline"
-                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full"
+                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full h-auto whitespace-normal leading-tight"
                     onClick={() => window.open('https://t.me/gavunwud', '_blank')}
                   >
                     JOIN TELEGRAM
@@ -481,7 +481,7 @@ export default function HeroSection() {
 
                   <Button
                     variant="outline"
-                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full"
+                    className="border-[#ff2e70] text-[#ff2e70] hover:bg-[#ff2e70]/10 font-medium px-4 py-3 rounded-lg text-sm w-full h-auto whitespace-normal leading-tight"
                     onClick={() => window.open('https://discord.gg/4GE46uduFs', '_blank')}
                   >
                     JOIN DISCORD
@@ -525,7 +525,7 @@ export default function HeroSection() {
                       <div className="flex flex-col gap-2">
                         <div className="text-[#ff2e70] hover:text-[#ff2e70]/80 transition-colors">
                           <a href={data.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-start md:justify-end gap-1">
-                            {data.dataSource === "dexscreener" ? "View on Dexscreener" : "View on GeckoTerminal"}
+                            {data.dataSource === "dexscreener" ? "View on Dexscreener" : "View on Hydration Price"}
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="mt-0.5">
                               <path fillRule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
                               <path fillRule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />

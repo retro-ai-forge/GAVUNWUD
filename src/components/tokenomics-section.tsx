@@ -221,7 +221,7 @@ export default function TokenomicsSection() {
                       rel="noopener noreferrer"
                       className="text-[#88c8ff] hover:underline text-sm"
                     >
-                      {dexData.dataSource === "dexscreener" ? "View on DexScreener →" : "View on GeckoTerminal →"}
+                      {dexData.dataSource === "dexscreener" ? "View on DexScreener →" : "View on Hydration Price →"}
                     </a>
                   )}
                 </div>

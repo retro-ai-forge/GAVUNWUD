@@ -41,8 +41,8 @@ type PriceData = {
 }
 
 const PAIR_ADDRESS = "0xb941ce809e9793289c9e9127102d447723cabdfb9d51d0893f2bdbf9958995ce"
-const GECKOTERMINAL_URL = `https://www.geckoterminal.com/hydration/pools/${PAIR_ADDRESS}`
 const WUD_ASSET_ID = 1000085
+export const HYDRATION_PRICE_URL = "https://hydration-preis.neckwork.net/1000085-10/4h"
 
 // Dexscreener has stopped indexing this pool. hydration-preis.neckwork.net
 // is a working public price feed for Hydration DEX assets used as a fallback;
@@ -57,7 +57,7 @@ async function fetchFromPreis(): Promise<PriceData> {
   return {
     price: asset.price,
     change24h: (asset.change24h ?? 0) * 100,
-    url: GECKOTERMINAL_URL,
+    url: HYDRATION_PRICE_URL,
     liquidityUsd: 0,
     liquidityBase: 0,
     liquidityQuote: 0,

@@ -5,7 +5,7 @@ type BurnStats = {
   lpSharesBurned: number
   lpBurners: number
   totalBurnedUsd: number
-  lastUpdated: Date
+  lastUpdated: Date | null
   totalLpShares: number
   totalLiquidity: number
 }
@@ -16,10 +16,15 @@ export function useBurnStats() {
     lpSharesBurned: 219.3962,
     lpBurners: 156,
     totalBurnedUsd: 28048.39,
-    lastUpdated: new Date(),
+    lastUpdated: null,
     totalLpShares: 1052,
     totalLiquidity: 0
   })
+
+  // Stamped after mount: rendering a locale date during SSR mismatches on hydration.
+  useEffect(() => {
+    setData((prev) => (prev.lastUpdated ? prev : { ...prev, lastUpdated: new Date() }))
+  }, [])
 
   useEffect(() => {
     // liquidityUsd is only meaningful when sourced from Dexscreener directly;

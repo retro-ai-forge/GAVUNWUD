@@ -209,9 +209,11 @@ export default function NftSection() {
                   </div>
                 </div>
                 
-                <div className="text-xs text-gray-500 text-right mt-2">
-                  Updated: {burnStats.lastUpdated.toLocaleString()}
-                </div>
+                {burnStats.lastUpdated && (
+                  <div className="text-xs text-gray-500 text-right mt-2">
+                    Updated: {burnStats.lastUpdated.toLocaleString()}
+                  </div>
+                )}
               </div>
             </div>
 
