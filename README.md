@@ -5,6 +5,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
+npm build
 npm run dev
 # or
 yarn dev
@@ -34,3 +35,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Deploying to Google Cloud Run
+
+Deploys are driven by [`rav`](https://pypi.org/project/rav/) (see `rav.yaml`), a Python CLI, so it needs a virtualenv:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+With the venv active, `rav` is on your `PATH` for the commands below.
+
+```bash
+# gcloud auth login
+# after changing login email:
+gcloud auth list
+gcloud config list
+gcloud config set account <email>
+gcloud auth application-default login
+gcloud auth application-default set-quota-project thewudlands
+gcloud config set project thewudlands
+gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://europe-west1-docker.pkg.dev
+
+# full build and deploy
+# to prevent error: close local uvicorn and npm run dev
+rav run gcp_full
+```

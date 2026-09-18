@@ -17,7 +17,7 @@ export function SoundToggle({ className }: { className?: string }) {
       title={label}
       className={cn(
         "flex items-center justify-center rounded-lg border border-gray-700 p-2 text-white transition-colors hover:border-[#ff2e70] hover:text-[#ff2e70]",
-        muted && "border-[#ff2e70] text-[#ff2e70]",
+        muted && "border-[#4ade80] text-[#4ade80] animate-sound-hint",
         className
       )}
     >

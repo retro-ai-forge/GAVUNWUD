@@ -6,6 +6,7 @@ import { Doughnut } from "react-chartjs-2"
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from "chart.js"
 import { useDexScreenerPrice } from "@/hooks/useDexScreenerPrice"
 import { formatNumber, formatCurrency } from "@/lib/utils"
+import { ExternalLink } from "lucide-react"
 // Register ChartJS components
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement)
 
@@ -204,14 +205,6 @@ export default function TokenomicsSection() {
                   </li>
                 </ul>
                 <div className="mt-3 flex flex-wrap gap-3">
-                  <a 
-                    href="https://hydration.subscan.io/account/7MnTh8N7p88jQURyvvvh5pZiV6DAMz8rywUokYqBmtHKw8AQ?tab=extrinsic"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#88c8ff] hover:underline text-sm"
-                  >
-                    View LP on Subscan →
-                  </a>
                   {dexData?.url && (
                     <a
                       href={dexData.url}
@@ -298,6 +291,29 @@ export default function TokenomicsSection() {
             </div>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-16"
+        >
+          <h3 className="text-2xl font-bold text-center text-[#ff2e70] mb-8">Holder Analytics</h3>
+          <div className="max-w-2xl mx-auto text-center bg-gray-900/50 border border-[#ff2e70]/30 rounded-xl p-8">
+            <p className="text-gray-300 mb-6">
+              Track live $WUD holder distribution, tiers, and on-chain stats on Wudalytics.
+            </p>
+            <a
+              href="https://wudalytics.xyz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#ff2e70] hover:bg-[#ff2e70]/80 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+            >
+              View on Wudalytics
+              <ExternalLink size={18} />
+            </a>
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

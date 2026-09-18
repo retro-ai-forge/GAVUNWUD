@@ -1,0 +1,40 @@
+scripts:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Local dev
+  # ═══════════════════════════════════════════════════════════════════════════
+  dev: npm run dev
+  build: npm run build
+  env_setup: cp .env-example .env && echo "Created .env file - please update with your values"
+
+  check_frontend: curl -s http://localhost:3000
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # GCP Deployment (requires gcloud CLI and authentication)
+  # Same GCP project as TheWudlands-App (thewudlands), separate Cloud Run service.
+  # ═══════════════════════════════════════════════════════════════════════════
+  gcp_auth: gcloud auth configure-docker europe-west1-docker.pkg.dev
+
+  gcp_create_repo: gcloud artifacts repositories create serverless-gavunwud-repo --repository-format=docker --location=europe-west1 --project=thewudlands
+
+  gcp_build: docker build --platform=linux/amd64 -f Dockerfile -t serverless-gavunwud-amd64 .
+  gcp_build_no_cache: docker build --platform=linux/amd64 -f Dockerfile -t serverless-gavunwud-amd64 . --no-cache
+
+  gcp_tag:
+    - docker tag serverless-gavunwud-amd64 europe-west1-docker.pkg.dev/thewudlands/serverless-gavunwud-repo/serverless-gavunwud:latest
+
+  gcp_push:
+    - rav run gcp_build
+    - rav run gcp_tag
+    - docker push europe-west1-docker.pkg.dev/thewudlands/serverless-gavunwud-repo/serverless-gavunwud:latest
+
+  gcp_deploy: gcloud run deploy serverless-gavunwud --image=europe-west1-docker.pkg.dev/thewudlands/serverless-gavunwud-repo/serverless-gavunwud:latest --allow-unauthenticated --region=europe-west1 --project=thewudlands --port=3000
+
+  gcp_full:
+    - rav run build
+    - rav run gcp_push
+    - rav run gcp_deploy
+
+  gcp_full_deploy:
+    - rav run gcp_auth
+    - rav run gcp_push
+    - rav run gcp_deploy

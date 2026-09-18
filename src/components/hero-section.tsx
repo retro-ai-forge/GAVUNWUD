@@ -89,12 +89,12 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 right-0 z-50 py-3 px-4 bg-black/80 backdrop-blur-md border-b border-gray-800 hidden md:block"
+            className="fixed top-0 left-0 right-0 z-50 py-3 px-4 bg-black/80 backdrop-blur-md border-b border-gray-800"
           >
             <div className="container mx-auto flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="relative h-10 w-10">
+                  <div className="relative h-8 w-8 md:h-10 md:w-10">
                     <Image
                       src="/images/gavun-wud-black.webp"
                       alt="Gavun WUD Logo"
@@ -102,15 +102,15 @@ export default function HeroSection() {
                       className="object-contain"
                     />
                   </div>
-                  <div className="text-lg font-bold">
+                  <div className="text-base md:text-lg font-bold">
                     <span className="text-white">gavunwud</span>
                     <span className="text-[#ff2e70]">.xyz</span>
                   </div>
-                  <SoundToggle />
+                  <SoundToggle className="hidden md:flex" />
                 </div>
               </div>
 
-              <nav className="flex items-center gap-6 text-sm font-medium">
+              <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
                 {navLinks.map(link => (
                   link.isExternal ? (
                     <Link
@@ -131,6 +131,22 @@ export default function HeroSection() {
                   )
                 ))}
               </nav>
+
+              <div className="md:hidden flex items-center gap-2">
+                <SoundToggle />
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-[#ff2e70] text-[#ff2e70]"
+                  onClick={() => setIsMobileMenuOpen(true)}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                  </svg>
+                </Button>
+              </div>
             </div>
           </motion.div>
         )}
@@ -312,7 +328,7 @@ export default function HeroSection() {
         )}
       </AnimatePresence>
 
-      <section className="relative min-h-screen flex flex-col overflow-hidden py-6 px-4 md:px-6 bg-black">
+      <section className="relative min-h-screen flex flex-col overflow-hidden pt-3 pb-6 md:py-6 px-4 md:px-6 bg-black">
         <div className="container mx-auto z-40">
           <div className="flex items-center justify-between gap-4">
             <motion.div
@@ -321,7 +337,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5 }}
               className="flex items-center gap-3"
             >
-              <div className="relative h-12 w-12 md:h-16 md:w-16">
+              <div className="relative h-9 w-9 md:h-16 md:w-16">
                 <Image
                   src="/images/gavun-wud-black.webp"
                   alt="Gavun WUD Logo"
@@ -334,7 +350,7 @@ export default function HeroSection() {
                 <span className="text-white">gavunwud</span>
                 <span className="text-[#ff2e70]">.xyz</span>
               </div>
-              <SoundToggle className="hidden md:flex" />
+              <SoundToggle className="hidden md:flex mr-4" />
             </motion.div>
 
             <motion.nav
@@ -435,9 +451,6 @@ export default function HeroSection() {
                 </p>
                 <p className="mt-2 text-lg md:text-xl font-['Karantina',sans-serif] text-[#ff2e70]">
                   — Gavun Wud, Fownder of Polkadut 🍺
-                </p>
-                <p className="mt-3 text-sm text-gray-500 italic">
-                  JAM makes Polkadot good again
                 </p>
               </div>
 

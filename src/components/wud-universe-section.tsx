@@ -202,10 +202,15 @@ export default function WudUniverseSection() {
                 <iframe
                   key={muted ? "muted" : "unmuted"}
                   src={`https://wuduniverse.xyz/cabin/${currentCabin}?hideUI=true&muted=true`}
-                  className="w-full h-full"
+                  // Decorative only: the site now plays its own ambient track (see
+                  // SoundProvider), so this stays non-interactive to stop visitors
+                  // from also starting the cabin's own background music via its
+                  // in-frame play button, which would layer on top of it.
+                  className="w-full h-full pointer-events-none select-none"
                   title={`WUDuniverse Cabin ${currentCabin}`}
+                  tabIndex={-1}
+                  aria-hidden="true"
                   allow={muted ? CABIN_PERMISSIONS : `autoplay; ${CABIN_PERMISSIONS}`}
-                  allowFullScreen
                   loading="lazy"
                 />
               )}
