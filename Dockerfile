@@ -4,12 +4,16 @@
 # Install dependencies
 FROM node:20-slim AS deps
 WORKDIR /app
+# npm@latest (12.x) requires Node >=22; this image runs Node 20, so pin to
+# the newest npm major that still supports it.
+RUN npm install -g npm@11
 COPY package.json package-lock.json ./
 RUN npm ci
 
 # Build the Next.js app
 FROM node:20-slim AS builder
 WORKDIR /app
+RUN npm install -g npm@11
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
